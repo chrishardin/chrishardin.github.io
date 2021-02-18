@@ -244,7 +244,11 @@ a:hover
          -o-transition: opacity 1s ease;
             transition: opacity 1s ease;
 
+<<<<<<< HEAD
     background: url(../img/face.png);
+=======
+    background: url(../img/background.jpg);
+>>>>>>> 9cf848ed25c5aad7839e333fe12c7948c9137b12
     background-repeat: no-repeat;
     background-size: cover;
 }
