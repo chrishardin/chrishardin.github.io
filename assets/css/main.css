@@ -248,20 +248,7 @@ a:hover
     background-repeat: no-repeat;
     background-size: cover;
 }
- .asrc
-{
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
 
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    width: 100%;
-    height: 100%;
-
-}
 @media (max-width:1200px)
 {
     .image-container
@@ -553,7 +540,16 @@ a:hover
 {
     margin-bottom: 0;
 }
+#about .asrc
+{
+   
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
 
+}
 
 
 /** 7. Content Area --> Service
