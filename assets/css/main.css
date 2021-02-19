@@ -248,7 +248,7 @@ a:hover
     background-repeat: no-repeat;
     background-size: cover;
 }
-.image-container .asrc
+ .asrc
 {
     position: absolute;
     z-index: 1;
