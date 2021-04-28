@@ -1,1 +1,0 @@
-# ocryptic.com
