@@ -1,4 +1,4 @@
-A
+mainInputStocks = `A
 AA
 AAC
 AACG
@@ -8432,4 +8432,4 @@ ZWS
 ZY
 ZYME
 ZYNE
-ZYXI
+ZYXI`
