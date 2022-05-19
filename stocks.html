@@ -94,17 +94,20 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <section class="inner-page">
+    <section>
       <script src="./assets/inputStocks.txt"></script>
       <div class="container">
-
+        
+        <label> Prio:</label>
+        <li> TODO: Have options on what fields in the csv you want`</li>
         <li> TODO: Get the web parser to run after the submit..</li>
-        <li> TODO: Possibly add a timer that says how long it will take? HARD!?</li>
         <li> TODO: Show option to download file </li>
         <li> TODO: Show count of Strong Buys</li>
+        <label> Backlog:</label>
         <li> TODO: Show preview?</li>
+        <li> TODO: Possibly add a timer that says how long it will take? HARD!?</li>
         <li> TODO: Have option to select with what types (Strong Buy-Strong Sell)</li>
-        <li> TODO: Have options on what fields in the csv you want`</li>
+
 
         <br>
         <label>Choose an list of stocks from the provided dropdown, or provide your own:</label>
@@ -115,8 +118,11 @@
             <option value="3">Three</option>
           </select>
           <br>
+
+        <!--          
           <input type="file" name="inputfile" id="inputfile">
           <pre id="output"></pre>
+        -->
           <button class="btn btn-info" id="inputStocksSubmit">Submit</button>
           <br>
           <br>
@@ -131,8 +137,7 @@
         <pre id="output2"></pre>
         <input type="file" name="inputfile3" id="inputfile3">
         <pre id="output3"></pre>
-      </div>
-      
+      </div>      
     </section>
 
   </main><!-- End #main -->
@@ -168,9 +173,9 @@
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
 
   <!-- Template Main JS File -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/secondary.js"></script>
-
 </body>
 
 </html>
