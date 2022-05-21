@@ -109,8 +109,9 @@
  
           <script src="./assets/inputStocks.txt"></script>
           <div class="container">
-            <h3>Welcome!</h3>
+            <h2>Welcome!</h2>
 
+            <!-- Pick provided input file-->
             <label>Choose an list of stocks from the provided dropdown, or provide your own:</label>
             <form id="inputStocksForm">
               <select class="form-select" name="inputStocks" style="width:auto">
@@ -119,14 +120,104 @@
                 <option value="3">Three</option>
               </select>
               <br>
-    
+
+              <!-- Pick zacks rank -->
+              <h4>Pick which Zack Ranks you want to output:</h4>
+              <div class="d-flex flex-row">
+                <div class="d-flex flex-column flex-fill inline-field">
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="Zacks1" value="Zacks1" checked>
+                  Strong Buy - 1</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="Zacks2" value="Zacks2">
+                  Buy - 2</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="Zacks3" value="Zacks3">
+                  Hold - 3</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="Zacks4" value="Zacks4">
+                  Sell - 4</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="Zacks5" value="Zacks5">
+                  Strong Sell - 5</label>
+                </div>
+              </div>
+              <br>
+
+              <!-- Fields for headers -->
+              <h4>Pick the fields for your output:</h4>
+              <div class="d-flex flex-row">
+                <!-- About check boxes-->
+                <div class="d-flex flex-column flex-fill inline-field">
+                  <h5>About Fields</h5>
+                  <label class="form-check-label">
+                  <input name="Symbol" type="hidden" value="Symbol">
+                  <input class="form-check-input" type="checkbox" name="Symbol" value="Symbol" disabled checked>
+                  Symbol</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="Name" value="Name" checked>
+                  Name</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="IndustryMajor" value="IndustryMajor" checked>
+                  Industry Major</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="IndustryMinor" value="IndustryMinor" checked>
+                  Industry Minor</label>
+                </div>
+
+                <!-- Ranks check boxes-->
+                <div class="d-flex flex-column flex-fill inline-field">
+                  <h5>Rank Fields</h5>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="ZacksRank" value="ZacksRank"checked>
+                  Zacks Rank</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="OverallRank" value="OverallRank"checked>
+                 Overall Rank</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="Value" value="Value" checked>
+                  Value</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="Growth" value="Growth" checked>
+                  Growth</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="Momentum" value="Momentum" checked>
+                  Momentum</label>
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" name="VGM" value="VGM" checked>
+                  VGM</label>
+                </div>
+
+                <!-- Income check boxes-->
+                <div class="d-flex flex-column flex-fill inline-field">
+                  <h5>Net Income Fields</h5>
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="Last4Years" value="Last4Years"checked>
+                    Over Last 4 Years</label>
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="Last3Years" value="Last3Years" disabled>
+                    Over Last 3 Years</label>
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="Last2Years" value="Last2Years" disabled>
+                    Over Last 2 Years</label>
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="ConsNetIncGrowth" value="ConsNetIncGrowth" checked>
+                    Consecutive Net Income Growth</label>
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="AverageGrowth" value="AverageGrowth" disabled>
+                    Average Growth</label>
+                </div>
+
+              </div>
+              <br>
+
+              <!-- Submit button -->
               <button class="btn btn-info" id="inputStocksSubmit">Submit</button>
               <br>
               <br>
               <div id="display-value"></div>
             </form>
 
-            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:40%"></div>
             <label> Prio:</label>
             <li> TODO: Have options on what fields in the csv you want`</li>
             <li> TODO: Get the web parser to run after the submit..</li>
@@ -135,6 +226,8 @@
             <label> Backlog:</label>
             <li> TODO: Show preview?</li>
             <li> TODO: Possibly add a timer that says how long it will take? HARD!?</li>
+            <li> TODO: ^^^ Just use progress bar, divided total stocks by 100, 
+              every time that number goes by, increase by 1% on bar</li>
             <li> TODO: Have option to select with what types (Strong Buy-Strong Sell)</li>
     
     

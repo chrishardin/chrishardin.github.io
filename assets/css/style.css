@@ -1072,3 +1072,18 @@ section {
     padding-right: 20px 15px;
   }
 }
+
+.inline-field input,
+.inline-field label {
+  display: inline-block;
+  margin-bottom: 0; /* I added this after I posted my reply */
+  vertical-align: middle; /* Fixes any weird issues in Firefox and IE */
+}
+
+.check-about
+{
+  float:left;
+  width:25%;
+  background-color: #149ddd;
+  border-color: #18d26e;
+}
