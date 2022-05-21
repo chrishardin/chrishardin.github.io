@@ -25,6 +25,7 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -94,51 +95,78 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <section>
-      <script src="./assets/inputStocks.txt"></script>
-      <div class="container">
-        
-        <label> Prio:</label>
-        <li> TODO: Have options on what fields in the csv you want`</li>
-        <li> TODO: Get the web parser to run after the submit..</li>
-        <li> TODO: Show option to download file </li>
-        <li> TODO: Show count of Strong Buys</li>
-        <label> Backlog:</label>
-        <li> TODO: Show preview?</li>
-        <li> TODO: Possibly add a timer that says how long it will take? HARD!?</li>
-        <li> TODO: Have option to select with what types (Strong Buy-Strong Sell)</li>
+    <!-- ======= Tabs ======= -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#provided-input-files">Provided input files</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#local-input-files">Local input file</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#compare-2-local-files">Compare 2 local files</a></li>
+    </ul><!-- End Tabs -->
+    
 
+    <div class="tab-content">
+      <!-- ======= Provided input files ======= -->
+      <div id="provided-input-files" class="tab-pane container active"><br>
+ 
+          <script src="./assets/inputStocks.txt"></script>
+          <div class="container">
+            <h3>Welcome!</h3>
 
-        <br>
-        <label>Choose an list of stocks from the provided dropdown, or provide your own:</label>
-        <form id="inputStocksForm">
-          <select class="form-select" name="inputStocks" style="width:auto">
-            <option selected>Over 8000 US Stocks</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <br>
+            <label>Choose an list of stocks from the provided dropdown, or provide your own:</label>
+            <form id="inputStocksForm">
+              <select class="form-select" name="inputStocks" style="width:auto">
+                <option selected>Over 8000 US Stocks</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              <br>
+    
+              <button class="btn btn-info" id="inputStocksSubmit">Submit</button>
+              <br>
+              <br>
+              <div id="display-value"></div>
+            </form>
 
-        <!--          
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:40%"></div>
+            <label> Prio:</label>
+            <li> TODO: Have options on what fields in the csv you want`</li>
+            <li> TODO: Get the web parser to run after the submit..</li>
+            <li> TODO: Show option to download file </li>
+            <li> TODO: Show count of Strong Buys</li>
+            <label> Backlog:</label>
+            <li> TODO: Show preview?</li>
+            <li> TODO: Possibly add a timer that says how long it will take? HARD!?</li>
+            <li> TODO: Have option to select with what types (Strong Buy-Strong Sell)</li>
+    
+    
+            <br>
+
+    
+          </div>
+       
+      </div><!-- End Provided input files -->
+
+      <!-- ======= local input files ======= -->
+      <div id="local-input-files" class="tab-pane container fade"><br>
+        <h3>Menu 1</h3>
+        <div class="container">           
           <input type="file" name="inputfile" id="inputfile">
           <pre id="output"></pre>
-        -->
-          <button class="btn btn-info" id="inputStocksSubmit">Submit</button>
-          <br>
-          <br>
-          <div id="display-value"></div>
-        </form>
+        </div>
+        <p>Some content in menu 1.</p>
+      </div><!-- End local input files -->
 
-      </div>
-      <br>
-      <div class="container">
-        <label>TODO: Compare two files to see which stocks are now listed as Strong Buys, and which aren't.</label>
-        <input type="file" name="inputfile2" id="inputfile2">
-        <pre id="output2"></pre>
-        <input type="file" name="inputfile3" id="inputfile3">
-        <pre id="output3"></pre>
-      </div>      
-    </section>
+      <!-- ======= Compare 2 local input files ======= -->
+      <div id="compare-2-local-files" class="tab-pane container fade"><br>
+        <h3>Menu 2</h3>
+        <div class="container">
+          <label>TODO: Compare two files to see which stocks are now listed as Strong Buys, and which aren't.</label>
+          <input type="file" name="inputfile2" id="inputfile2">
+          <pre id="output2"></pre>
+          <input type="file" name="inputfile3" id="inputfile3">
+          <pre id="output3"></pre>
+        </div>   
+      </div><!-- End compare 2 local input files -->
+    </div>
 
   </main><!-- End #main -->
 
@@ -171,9 +199,10 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/typed.js/typed.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/secondary.js"></script>
 </body>
