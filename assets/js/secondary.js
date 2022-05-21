@@ -16,11 +16,11 @@
   }
   
   // InputStocks form select submit
-  const runInputStocksSubmit = (event) => {
+  const runProvidedInputStocksSubmit = (event) => {
     event.preventDefault();
-    var selectedFileOption = getProvidedInputFile(document.forms["inputStocksForm"].inputStocks.value)
-    var selectedZackRanks = Array.from(document.getElementsByClassName("ranks")).filter(element => element.checked).map(element => element.value)
-    var selectedFields = Array.from(document.getElementsByClassName("outputFields")).filter(element => element.checked).map(element => element.value)
+    var selectedFileOption = getProvidedInputFile(document.forms["PI-inputStocksForm"].inputStocks.value)
+    var selectedZackRanks = Array.from(document.getElementsByClassName("PI-ranks")).filter(element => element.checked).map(element => element.value)
+    var selectedFields = Array.from(document.getElementsByClassName("PI-outputFields")).filter(element => element.checked).map(element => element.value)
 
     if(selectedZackRanks.length == 0)
     {
@@ -39,21 +39,37 @@
     }
   }
 
-
-  var inputStocksSubmit = document.getElementById('inputStocksSubmit');
-  var showValue = document.getElementById("display-value");
-  inputStocksSubmit.addEventListener("click", runInputStocksSubmit);
+    // InputStocks form select submit
+    const runLocalInputStocksSubmit = (event) => {
+      event.preventDefault();
+      var selectedFileOption = getProvidedInputFile(document.forms["LI-inputStocksForm"].localInputFile.value)
+      var selectedZackRanks = Array.from(document.getElementsByClassName("LI-ranks")).filter(element => element.checked).map(element => element.value)
+      var selectedFields = Array.from(document.getElementsByClassName("LI-outputFields")).filter(element => element.checked).map(element => element.value)
   
+      if(selectedZackRanks.length == 0)
+      {
+        alert("You must pick at least 1 option from Zacks Ranks!")
+        return false;
+      }
+        
+      //console.log("file: ", selectedFileOption)
+      console.log("zack ranks: ", selectedZackRanks)
+      console.log("fields: ", selectedFields)
+  
+      if(selectedFileOption)
+      {
+        let fileArray = selectedFileOption.split('\n');
+        showValue.innerText = `This file has ${fileArray.length} stocks!\n`
+      }
+    }
+
+  var providedInputStocksSubmit = document.getElementById('providedInputStocksSubmit');
+  var localInputStocksSubmit = document.getElementById('localInputStocksSubmit');
+  var showValue = document.getElementById("display-value");
+  providedInputStocksSubmit.addEventListener("click", runProvidedInputStocksSubmit);
+  localInputStocksSubmit.addEventListener("click", runLocalInputStocksSubmit);
 
 
 
-//   document.getElementById('inputfile').addEventListener('change', function () {
-//     var fr = new FileReader();
-//     fr.onload = function () {
-//       document.getElementById('output')
-//         .textContent = fr.result;
-//     }
 
-//     fr.readAsText(this.files[0]);
-//   }) 
 
