@@ -117,8 +117,8 @@
             <form id="inputStocksForm">
               <select class="form-select" name="inputStocks" style="width:auto">
                 <option selected>Over 8000 US Stocks</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="2" disabled>Null</option>
+                <option value="3" disabled>Null</option>
               </select>
               <br>
 
@@ -127,19 +127,19 @@
               <div class="d-flex flex-row">
                 <div class="d-flex flex-column flex-fill inline-field">
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="Zacks1" value="Zacks1" checked>
+                  <input class="form-check-input ranks" type="checkbox" name="StrongBuy" value="1" checked>
                   Strong Buy - 1</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="Zacks2" value="Zacks2">
+                  <input class="form-check-input ranks" type="checkbox" name="Buy" value="2">
                   Buy - 2</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="Zacks3" value="Zacks3">
+                  <input class="form-check-input ranks" type="checkbox" name="Hold" value="3">
                   Hold - 3</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="Zacks4" value="Zacks4">
+                  <input class="form-check-input ranks" type="checkbox" name="Sell" value="4">
                   Sell - 4</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="Zacks5" value="Zacks5">
+                  <input class="form-check-input ranks" type="checkbox" name="StrongSell" value="5">
                   Strong Sell - 5</label>
                 </div>
               </div>
@@ -152,17 +152,17 @@
                 <div class="d-flex flex-column flex-fill inline-field">
                   <h5>About Fields</h5>
                   <label class="form-check-label">
-                  <input name="Symbol" type="hidden" value="Symbol">
+                  <input class="outputFields" name="Symbol" type="hidden" value="Symbol" checked>
                   <input class="form-check-input" type="checkbox" name="Symbol" value="Symbol" disabled checked>
                   Symbol</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="Name" value="Name" checked>
+                  <input class="form-check-input outputFields" type="checkbox" name="Name" value="Name" checked>
                   Name</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="IndustryMajor" value="IndustryMajor" checked>
+                  <input class="form-check-input outputFields" type="checkbox" name="IndustryMajor" value="IndustryMajor" checked>
                   Industry Major</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="IndustryMinor" value="IndustryMinor" checked>
+                  <input class="form-check-input outputFields" type="checkbox" name="IndustryMinor" value="IndustryMinor" checked>
                   Industry Minor</label>
                 </div>
 
@@ -170,22 +170,22 @@
                 <div class="d-flex flex-column flex-fill inline-field">
                   <h5>Rank Fields</h5>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="ZacksRank" value="ZacksRank"checked>
+                  <input class="form-check-input outputFields" type="checkbox" name="ZacksRank" value="ZacksRank"checked>
                   Zacks Rank</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="OverallRank" value="OverallRank"checked>
+                  <input class="form-check-input outputFields" type="checkbox" name="OverallRank" value="OverallRank"checked>
                  Overall Rank</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="Value" value="Value" checked>
+                  <input class="form-check-input outputFields" type="checkbox" name="Value" value="Value" checked>
                   Value</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="Growth" value="Growth" checked>
+                  <input class="form-check-input outputFields" type="checkbox" name="Growth" value="Growth" checked>
                   Growth</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="Momentum" value="Momentum" checked>
+                  <input class="form-check-input outputFields" type="checkbox" name="Momentum" value="Momentum" checked>
                   Momentum</label>
                   <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox" name="VGM" value="VGM" checked>
+                  <input class="form-check-input outputFields" type="checkbox" name="VGM" value="VGM" checked>
                   VGM</label>
                 </div>
 
@@ -193,19 +193,19 @@
                 <div class="d-flex flex-column flex-fill inline-field">
                   <h5>Net Income Fields</h5>
                   <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="Last4Years" value="Last4Years"checked>
+                    <input class="form-check-input outputFields" type="checkbox" name="Last4Years" value="Last4Years"checked>
                     Over Last 4 Years</label>
                     <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="Last3Years" value="Last3Years" disabled>
+                    <input class="form-check-input outputFields" type="checkbox" name="Last3Years" value="Last3Years" disabled>
                     Over Last 3 Years</label>
                     <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="Last2Years" value="Last2Years" disabled>
+                    <input class="form-check-input outputFields" type="checkbox" name="Last2Years" value="Last2Years" disabled>
                     Over Last 2 Years</label>
                     <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="ConsNetIncGrowth" value="ConsNetIncGrowth" checked>
+                    <input class="form-check-input outputFields" type="checkbox" name="ConsNetIncGrowth" value="ConsNetIncGrowth" checked>
                     Consecutive Net Income Growth</label>
                     <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="AverageGrowth" value="AverageGrowth" disabled>
+                    <input class="form-check-input outputFields" type="checkbox" name="AverageGrowth" value="AverageGrowth" checked>
                     Average Growth</label>
                 </div>
 

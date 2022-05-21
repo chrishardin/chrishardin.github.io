@@ -9,6 +9,7 @@
     else if(selectedOption == 2 || selectedOption == 3)
     {
       alert("Not valid atm.")
+      return false;
     }
   
     return file
@@ -17,15 +18,28 @@
   // InputStocks form select submit
   const runInputStocksSubmit = (event) => {
     event.preventDefault();
-    var selectedOption = document.forms["inputStocksForm"].inputStocks;
-    //showValue.innerText = `You have selected: ${selectedOption.value}`;
-    let file = getProvidedInputFile(selectedOption.value);
-    if(file)
+    var selectedFileOption = getProvidedInputFile(document.forms["inputStocksForm"].inputStocks.value)
+    var selectedZackRanks = Array.from(document.getElementsByClassName("ranks")).filter(element => element.checked).map(element => element.value)
+    var selectedFields = Array.from(document.getElementsByClassName("outputFields")).filter(element => element.checked).map(element => element.value)
+
+    if(selectedZackRanks.length == 0)
     {
-      let fileArray = file.split('\n');
+      alert("You must pick at least 1 option from Zacks Ranks!")
+      return false;
+    }
+      
+    //console.log("file: ", selectedFileOption)
+    console.log("zack ranks: ", selectedZackRanks)
+    console.log("fields: ", selectedFields)
+
+    if(selectedFileOption)
+    {
+      let fileArray = selectedFileOption.split('\n');
       showValue.innerText = `This file has ${fileArray.length} stocks!\n`
     }
   }
+
+
   var inputStocksSubmit = document.getElementById('inputStocksSubmit');
   var showValue = document.getElementById("display-value");
   inputStocksSubmit.addEventListener("click", runInputStocksSubmit);
