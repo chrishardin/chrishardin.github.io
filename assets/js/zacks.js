@@ -1,4 +1,10 @@
-const fs = require('fs');
+// const fs = require('fs');
+
+
+export function help(){
+    console.log('hepl');
+}
+
 
 function getDateString() {
   const date = new Date();
@@ -14,6 +20,10 @@ function getDateString() {
 * - stocksInput.txt
 * - testStocksInput.txt
 */
+
+module.exports = function x() {
+    console.log("testing")
+}
 
 const INPUTFILE = 'stocksInput.txt';
 const OUTPUTFILE = 'stocksOutput_' + getDateString() + '.csv';
