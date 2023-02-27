@@ -1,4 +1,6 @@
-  const getProvidedInputFile = (selectedOption) => {
+import * as functions from './functions.js';
+
+const getProvidedInputFile = (selectedOption) => {
     let file;
   
     if(selectedOption == "Over 8000 US Stocks")
@@ -83,7 +85,7 @@ const genericSubmitHelper = (selectedFileOption, selectedZackRanks, selectedFiel
 
      // this.outputStockData is for post run data if needed
      // when enabled, remove comment from saveStrongBuyDataToFile(~159)::callback()
-     //this.inputStocks(inputFile, allInputStocks => this.saveStrongBuyDataToFile(outputFile, allInputStocks, headers, headers2, /*strongBuyStocks => this.outputStockData(outputFile, strongBuyStocks) */) );
+     functions.inputStocks(inputFile, allInputStocks => this.saveStrongBuyDataToFile(outputFile, allInputStocks, headers, headers2, /*strongBuyStocks => this.outputStockData(outputFile, strongBuyStocks) */) );
  }
 
   var providedInputStocksSubmit = document.getElementById('providedInputStocksSubmit');
