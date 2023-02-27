@@ -6,7 +6,7 @@ var readline = require('readline');
 var stream = require('stream');
 
 // gets the raw data for a given website
-function getRawData = (URL) => {
+function getRawData(URL) {
 
     return fetch(URL)
         .then((response) => response.text())
@@ -18,7 +18,7 @@ function getRawData = (URL) => {
         });
 };
 
-function getCSVData = ($, headers, stock) => {
+function getCSVData($, headers, stock) {
     let retVal = '';
     let mainData = $('.rank_view').text()
     headers = headers.slice(0, headers.length -1);
@@ -42,7 +42,7 @@ function getCSVData = ($, headers, stock) => {
 }
 
 // uses cheerio scraper to find Strong Buys on zacks.com
-function saveStrongBuyDataToFile = async (outputFile, allInputStocks, headers, headers2, callback) => {
+function async saveStrongBuyDataToFile(outputFile, allInputStocks, headers, headers2, callback) {
 
     let strongBuyStocks = []
     let counter = 0;
@@ -173,7 +173,7 @@ function saveStrongBuyDataToFile = async (outputFile, allInputStocks, headers, h
 }
 
 // input stocks
-function inputStocks = async (inputFile, callback) => {
+function async inputStocks(inputFile, callback) {
 
     var instream = fs.createReadStream(inputFile);
     var outstream = new stream();
@@ -196,7 +196,7 @@ function inputStocks = async (inputFile, callback) => {
 }
 
 // after stocks have been outputed, get count
-module.exports.outputStockData = async (outputFile, strongBuyStocks) => {
+function async outputStockData(outputFile, strongBuyStocks) {
 
     let useOutputFileForData = false;
 
@@ -225,7 +225,7 @@ module.exports.outputStockData = async (outputFile, strongBuyStocks) => {
 }
 
 // run the program
-function runProgram = async (inputFile, outputFile, headers, headers2) => {
+function async runProgram(inputFile, outputFile, headers, headers2) {
 
      console.log('Now running Money Duplication Glitch 4000.')
 
