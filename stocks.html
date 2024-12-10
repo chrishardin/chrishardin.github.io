@@ -193,19 +193,19 @@
                 <div class="d-flex flex-column flex-fill inline-field">
                   <h5>Net Income Fields</h5>
                   <label class="form-check-label">
-                    <input class="form-check-input PI-outputFields" type="checkbox" name="Last4Years" value="Last4Years"checked>
+                    <input class="form-check-input PI-outputFields2" type="checkbox" name="Last4Years" value="Last4Years"checked>
                     Over Last 4 Years</label>
                     <label class="form-check-label">
-                    <input class="form-check-input PI-outputFields" type="checkbox" name="Last3Years" value="Last3Years" disabled>
+                    <input class="form-check-input PI-outputFields2" type="checkbox" name="Last3Years" value="Last3Years" disabled>
                     Over Last 3 Years</label>
                     <label class="form-check-label">
-                    <input class="form-check-input PI-outputFields" type="checkbox" name="Last2Years" value="Last2Years" disabled>
+                    <input class="form-check-input PI-outputFields2" type="checkbox" name="Last2Years" value="Last2Years" disabled>
                     Over Last 2 Years</label>
                     <label class="form-check-label">
-                    <input class="form-check-input PI-outputFields" type="checkbox" name="ConsNetIncGrowth" value="Consecutive Net Income Growth" checked>
+                    <input class="form-check-input PI-outputFields2" type="checkbox" name="ConsNetIncGrowth" value="Consecutive Net Income Growth" checked>
                     Consecutive Net Income Growth</label>
                     <label class="form-check-label">
-                    <input class="form-check-input PI-outputFields" type="checkbox" name="AverageGrowth" value="Average Growth" checked>
+                    <input class="form-check-input PI-outputFields2" type="checkbox" name="AverageGrowth" value="Average Growth" checked>
                     Average Growth</label>
                 </div>
 
@@ -213,26 +213,148 @@
               <br>
 
               <!-- Submit button -->
-              <button class="btn btn-info" id="providedInputStocksSubmit">Submit</button>
+               <!-- id="providedInputStocksSubmit -->
+              <button class="btn btn-info" id="submitbutton">Submit</button> 
+              <br>
+              <div id="loadingMessage" style="display: none;">Loading...</div>
+              <div id="progressContainer" style="display: none;">
+                <div id="progressText">Progress: 0/0</div>
+              </div>
+              <div id="resultMessage" style="display: none;"></div>
+                <a id="downloadLink" style="display: none;" href="#" download="">Download Output</a>
+              <br>
+              <br>
+              <div id="previousRuns">
+                <h3>Previous Runs</h3>
+                <ul id="previousRunsList"></ul>
+              </div>
+              
+              <script>
+                document.getElementById('submitbutton').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const submitButton = document.getElementById('submitbutton');
+                    submitButton.disabled = true;
+
+                    const inputFile = 'inputStocks.txt';
+                    const outputFile = 'stocksOutput_' + getDateString() + '.csv';
+                    const headers = 'Symbol,Name,Industry Major,Industry Minor,Rank,Value,Growth,Momentum,VGM,';
+                    const headers2 = 'Net Income 1,Net Income 2,Net Income 3,Net Income 4,Net Income 5,Consecutive Net Income Growth,Average Growth\n';
+                
+                    var selectedZackRanks = Array.from(document.getElementsByClassName("LI-ranks")).filter(element => element.checked).map(element => element.value)
+                    var selectedHeaders = Array.from(document.getElementsByClassName("LI-outputFields")).filter(element => element.checked).map(element => element.value)
+                    var selectedHeaders2 = Array.from(document.getElementsByClassName("LI-outputFields2")).filter(element => element.checked).map(element => element.value)
+
+                    // Show loading message
+                    document.getElementById('loadingMessage').style.display = 'block';
+                    document.getElementById('resultMessage').style.display = 'none';
+                    document.getElementById('downloadLink').style.display = 'none';
+                    document.getElementById('progressContainer').style.display = 'block';
+
+                    const eventSource = new EventSource('http://144.172.75.84:3000/progress');
+                    eventSource.onmessage = function(event) {
+                        const progress = JSON.parse(event.data);
+                        const progressText = document.getElementById('progressText');
+                        progressText.innerText = `Progress: ${progress.completed}/${progress.total}`;
+                    };
+
+                    fetch('http://144.172.75.84:3000/run-program', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ inputFile, outputFile, selectedHeaders, selectedHeaders2, selectedZackRanks})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('loadingMessage').style.display = 'none';
+                        document.getElementById('resultMessage').style.display = 'block';
+                        document.getElementById('resultMessage').innerText = `${data.message}! Output file created: ` + outputFile;
+                        console.log(data);
+
+                        // Show download link
+                        document.getElementById('downloadLink').style.display = 'block';
+                        document.getElementById('downloadLink').href = `http://144.172.75.84:3000/download?file=${data.filePath}`;
+
+                        eventSource.close();
+                        submitButton.disabled = false;
+                      })
+                    .catch(error => {
+                        document.getElementById('loadingMessage').style.display = 'none';
+                        document.getElementById('resultMessage').style.display = 'block';
+                        document.getElementById('resultMessage').innerText = 'Error: ' + error.message;
+                        console.error('Error:', error);
+
+                        eventSource.close();
+                        submitButton.disabled = false;
+                    });
+                });
+
+                function fetchPreviousRuns() {
+                  fetch('http://144.172.75.84:3000/previous-runs')
+                    .then(response => response.json())
+                    .then(runs => {
+                      console.log('runs', runs)
+                      const previousRunsList = document.getElementById('previousRunsList');
+      
+                      previousRunsList.innerHTML = '';
+                      const sortedRuns = runs.sort((a, b) => {
+                        const dateA = new Date(a.file.match(/\d{4}-\d{2}-\d{2}/)[0]);
+                        const dateB = new Date(b.file.match(/\d{4}-\d{2}-\d{2}/)[0]);
+                        return dateB - dateA;
+                      });
+                      const lastFiveRuns = sortedRuns.slice(0, 5);
+                      lastFiveRuns.forEach(run => {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = `http://144.172.75.84:3000/download?file=${run.file}`;
+                        link.innerText = run.file;
+                        link.download = run.file;
+                        listItem.appendChild(link);
+   
+                        if (run.duration) {
+                          const durationText = document.createElement('span');
+                          const minutes = Math.floor(run.duration / 60);
+                          const seconds = Math.floor(run.duration % 60);
+                          durationText.innerText = ` (${minutes}m:${seconds}s)`;
+                          listItem.appendChild(durationText);
+                        }
+                        previousRunsList.appendChild(listItem);
+                      });
+                    })
+                    .catch(error => console.error('Error fetching previous runs:', error));
+                }
+
+
+              function checkJobStatus() {
+                  fetch('http://144.172.75.84:3000/job-status')
+                      .then(response => response.json())
+                      .then(data => {
+                          const submitButton = document.getElementById('submitbutton');
+                          if (data.isJobRunning) {
+                              submitButton.disabled = true;
+                          } else {
+                              submitButton.disabled = false;
+                          }
+                      })
+                      .catch(error => console.error('Error checking job status:', error));
+              }
+              // Fetch previous runs on page load
+              document.addEventListener('DOMContentLoaded', fetchPreviousRuns);
+            </script>
               <br>
               <br>
               <div id="display-value"></div>
             </form>
 
             <label> Prio:</label>
-            <li> TODO: Get the web parser to run after the submit..</li>
-            <li> TODO: Show option to download file </li>
+            <li> Finished</li>
             <label> Backlog:</label>
             <li> TODO: Show preview?</li>
             <li> TODO: Possibly add a timer that says how long it will take? HARD!?</li>
             <li> TODO: ^^^ Just use progress bar, divided total stocks by 100, 
               every time that number goes by, increase by 1% on bar</li>
             <li> TODO: Have option to select with what types (Strong Buy-Strong Sell)</li>
-    
-    
             <br>
-
-    
           </div>
        
       </div><!-- End Provided input files -->
@@ -316,19 +438,19 @@
               <div class="d-flex flex-column flex-fill inline-field">
                 <h5>Net Income Fields</h5>
                 <label class="form-check-label">
-                  <input class="form-check-input LI-outputFields" type="checkbox" name="Last4Years" value="Last4Years"checked>
+                  <input class="form-check-input LI-outputFields2" type="checkbox" name="Last4Years" value="Last4Years"checked>
                   Over Last 4 Years</label>
                   <label class="form-check-label">
-                  <input class="form-check-input LI-outputFields" type="checkbox" name="Last3Years" value="Last3Years" disabled>
+                  <input class="form-check-input LI-outputFields2" type="checkbox" name="Last3Years" value="Last3Years" disabled>
                   Over Last 3 Years</label>
                   <label class="form-check-label">
-                  <input class="form-check-input LI-outputFields" type="checkbox" name="Last2Years" value="Last2Years" disabled>
+                  <input class="form-check-input LI-outputFields2" type="checkbox" name="Last2Years" value="Last2Years" disabled>
                   Over Last 2 Years</label>
                   <label class="form-check-label">
-                  <input class="form-check-input LI-outputFields" type="checkbox" name="ConsNetIncGrowth" value="ConsNetIncGrowth" checked>
+                  <input class="form-check-input LI-outputFields2" type="checkbox" name="ConsNetIncGrowth" value="ConsNetIncGrowth" checked>
                   Consecutive Net Income Growth</label>
                   <label class="form-check-label">
-                  <input class="form-check-input LI-outputFields" type="checkbox" name="AverageGrowth" value="AverageGrowth" checked>
+                  <input class="form-check-input LI-outputFields2" type="checkbox" name="AverageGrowth" value="AverageGrowth" checked>
                   Average Growth</label>
               </div>
 
@@ -392,11 +514,11 @@
 
   <!-- Template Main JS File -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="js/cheerio/lib/index.js></script>
+  <!--<script src="js/cheerio/lib/index.js></script>
   <script src="js/cheerio-select/lib/index.js"></script>
   <script src="js/node-fetch/lib/index.js"></script>
   <script src="assets/js/main.js"></script>
-  <script type="module" src="assets/js/functions.js"></script>
+  <script type="module" src="assets/js/functions.js"></script> -->
   <script  type="text/javascript" src="assets/js/secondary.js"></script>
 </body>
 
